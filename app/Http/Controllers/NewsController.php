@@ -1,28 +1,67 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Pegawai;
 use App\Models\Post;
+use App\Models\Category;
 use App\Models\Videos;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
+{
+    // Ambil ID kategori dari request
+    $categoryId = $request->get('category_id');
+
+    // Jika kategori dipilih, filter post berdasarkan kategori
+    $posts = Post::when($categoryId, function ($query, $categoryId) {
+        return $query->where('category_id', $categoryId);
+    })->latest()->get();
+
+    $categories = Category::all();
+    $pegawais = Pegawai::all();
+    $videos = Videos::all();
+
+    return view('companymain', compact('posts', 'categories', 'pegawais', 'videos'));
+}
+
+
+    // Menampilkan detail post
+    public function show($id)
     {
-        $posts = Post::all();
-        $pegawais = Pegawai::all();
-        $videos = Videos::all();
-        return view('companymain', compact('posts','pegawais','videos'));
+        $post = Post::findOrFail($id); // Ambil post berdasarkan ID
+        return view('index', compact('post')); // Kirim data post ke view
     }
 
-    // In your PostController.php
-        public function show($id)
+    // Menampilkan post berdasarkan kategori
+    public function category($id)
     {
-        $post = Post::findOrFail($id);
+        // Cari kategori berdasarkan ID
+        $category = Category::findOrFail($id);
 
-        return view('index', compact('post'));
+        // Ambil semua posts berdasarkan kategori yang dipilih
+        $posts = $category->posts()->latest()->get();
+
+        // Kembalikan tampilan dengan data kategori dan posts
+        return view('category.show', compact('category', 'posts'));
+    }
+    // Mendapatkan post berdasarkan kategori melalui API
+    public function getPostsByCategory($id = null)
+    {
+        if ($id) {
+            // Validasi dan ambil data post berdasarkan kategori
+            $category = Category::findOrFail($id);
+
+            // Ambil post berdasarkan kategori
+            $posts = $category->posts()->latest()->get();
+        } else {
+            // Jika ID kategori tidak diberikan, ambil semua post
+            $posts = Post::latest()->get();
+        }
+
+        // Kembalikan response JSON
+        return response()->json($posts);
     }
 
 }

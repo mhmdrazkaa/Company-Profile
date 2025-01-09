@@ -26,12 +26,6 @@ class PegawaiResource extends Resource
     {
         return $form
             ->schema([
-                FileUpload::make('foto')
-                    ->label('Upload Foto')
-                    ->disk('public')
-                    ->directory('uploads')
-                    ->preserveFilenames()
-                    ->required(),
                 Forms\Components\TextInput::make('nama_lengkap'),
                 Forms\Components\Select::make('jenis_kelamin')
                     ->options([
@@ -46,42 +40,6 @@ class PegawaiResource extends Resource
                 Forms\Components\TextInput::make('no_telp')->label('Nomor Telepon'),
                 Forms\Components\TextInput::make('email'),
                 Forms\Components\TextInput::make('jabatan'),
-                FileUpload::make('foto')
-                    ->label('Upload Foto')
-                    ->disk('public')
-                    ->directory('uploads')
-                    ->preserveFilenames()
-                    ->required(),
-                FileUpload::make('foto')
-                    ->label('Upload Foto')
-                    ->disk('public')
-                    ->directory('uploads')
-                    ->preserveFilenames()
-                    ->required(),
-                FileUpload::make('foto')
-                    ->label('Upload Foto')
-                    ->disk('public')
-                    ->directory('uploads')
-                    ->preserveFilenames()
-                    ->required(),
-                FileUpload::make('foto')
-                    ->label('Upload Foto')
-                    ->disk('public')
-                    ->directory('uploads')
-                    ->preserveFilenames()
-                    ->required(),
-                FileUpload::make('foto')
-                    ->label('Upload Foto')
-                    ->disk('public')
-                    ->directory('uploads')
-                    ->preserveFilenames()
-                    ->required(),
-                FileUpload::make('foto')
-                    ->label('Upload Foto')
-                    ->disk('public')
-                    ->directory('uploads')
-                    ->preserveFilenames()
-                    ->required(),
                 FileUpload::make('foto')
                     ->label('Upload Foto')
                     ->disk('public')

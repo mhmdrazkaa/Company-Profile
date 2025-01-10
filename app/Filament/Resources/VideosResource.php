@@ -25,6 +25,7 @@ class VideosResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('judul'),
                 Forms\Components\TextInput::make('link'),
+                Forms\Components\TextInput::make('description'),
             ]);
     }
 
@@ -34,6 +35,7 @@ class VideosResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('judul'),
                 Tables\Columns\TextColumn::make('link'),
+                Tables\Columns\TextColumn::make('description'),
             ])
             ->filters([
                 //

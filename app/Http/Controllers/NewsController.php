@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pegawai;
+use App\Models\Gallery;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\Videos;
@@ -22,9 +23,18 @@ class NewsController extends Controller
     $categories = Category::all();
     $pegawais = Pegawai::all();
     $videos = Videos::all();
+    $galleries = Gallery::all();
 
-    return view('companymain', compact('posts', 'categories', 'pegawais', 'videos'));
+    return view('companymain', compact('posts', 'categories', 'pegawais', 'videos','galleries'));
 }
+
+public function gallery()
+{
+    $galleries = Gallery::all(); // Data from the Gallery table
+    $posts = Post::all();        // Data from the Post table
+    return view('companymain', compact('galleries', 'posts'));
+}
+
 
 
     // Menampilkan detail post

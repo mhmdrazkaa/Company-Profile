@@ -41,6 +41,7 @@ class PostResource extends Resource
                 ->options(Category::all()->pluck('judul', 'id'))
                 ->searchable()
                 ->required(),
+                Forms\Components\TextArea::make('deskripsi'),
             ]);
     }
 
@@ -53,7 +54,7 @@ class PostResource extends Resource
                 ImageColumn::make('file')
                     ->label('Foto')
                     ->disk('public')
-                    ->getStateUsing(fn ($record) => $record->foto)
+                    ->getStateUsing(fn ($record) => $record->file)
                     ->width(200)
                     ->height(100),
                 Tables\Columns\TextColumn::make('category.judul')->label('Kategori'),

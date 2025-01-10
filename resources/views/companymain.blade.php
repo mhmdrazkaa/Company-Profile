@@ -29,8 +29,6 @@
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 
-    <!-- Custom styles for Poppins font -->
-
 </head>
 <body class="bdy">
     <!-- Navbar -->
@@ -47,6 +45,7 @@
                 <div class="navbar-nav ms-auto py-0">
                     <a href="#home" class="nav-item nav-link">Home</a>
                     <a href="#sejarah" class="nav-item nav-link">Sejarah</a>
+                    <a href="#gallery" class="nav-item nav-link">Gallery</a>
                     <a href="#berita" class="nav-item nav-link">Berita</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Tentang Kami</a>
@@ -55,7 +54,6 @@
                             <a href="#layanan" class="dropdown-item">Layanan</a>
                         </div>
                     </div>
-                    <a href="#contact" class="nav-item nav-link">Kontak</a>
                 </div>
             </div>
         </nav>
@@ -106,31 +104,38 @@
         </div>
     </div>
 </div>
-
-
      <!-- Announcement End -->
 <!-- Box Container Baru untuk Video YouTube -->
-<div class="container-xxl py-5">
-    @foreach($videos as $video)
-    <div class="container px-lg-5">
-        <div class="border rounded p-4  mb-5 bg-primary">
-            <h3 class="text-center mb-4" style="color: white;" id="layanan"> Layanan {{ $video->judul }}</h3>
-            <div class="ratio ratio-16x9">
-                <iframe src="{{ $video->embedLink }}"
-                        title="YouTube video player"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                </iframe>
+<section id="layanan" style="padding-top: 50px;">
+    <div class="container-xxl py-5">
+        <h2 class="text-center mb-5">Layanan</h2>
+        <p class="text-black pb-3 animated zoomIn text-center">
+            Diskominfo Kota Bogor bertugas mengelola informasi dan komunikasi publik, termasuk layanan teknologi informasi pemerintah daerah. Layanannya meliputi penyediaan jaringan internet, pengelolaan data, hingga aplikasi pelayanan publik. Tujuannya adalah mendukung transparansi, efisiensi, dan pelayanan yang berbasis digital.
+        </p>
+        <div class="container px-lg-5">
+            <div class="row gy-4">
+                @foreach($videos as $video)
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="border rounded p-4 bg-primary h-100">
+                        <h3 class="text-center mb-4 text-white">{{ $video->judul }}</h3>
+                        <div class="ratio ratio-16x9">
+                            <iframe src="{{ $video->embedLink }}"
+                                    title="YouTube video player"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen>
+                            </iframe>
+                        </div>
+                        <p class="text-white mt-3">{{ $video->description }}</p>
+                    </div>
+                </div>
+                @endforeach
             </div>
         </div>
     </div>
-    @endforeach
-</div>
-
-
+</section>
 <!--end-->
-<section id="datapegawai" style="padding-top: 50px;">
+<section id="datapegawai" style="padding-top: 60px;">
 <div class="container ">
         <h2 class="text-center mb-4">Data Pegawai</h2>
         <div class="swiper">
@@ -157,71 +162,108 @@
         </div>
 </div>
 </section>
-
-<!-- Newsletter Start -->
-<div class="container-xxl bg-primary newsletter my-5 wow fadeInUp" data-wow-delay="0.1s" id="berita" style="padding-top: 50px;>
-    <div class="container px-lg-5">
-        <div class="row align-items-center" style="height: 250px;">
-            <div class="col-12 col-md-6">
-                <h1 class="text-white">Berita</h3>
-                <small class="text-white">Tentang Kominfo</small>
+<!-- Gallery Start -->
+<section id="gallery" style="padding-top: 50px;">
+    <div class="container-xxl bg-primary newsletter my-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container px-lg-5">
+            <div class="row align-items-center" style="height: 250px;">
+                <div class="col-12 col-md-6">
+                    <h1 class="text-white">Gallery</h1>
+                    <small class="text-white">Diskominfo Kota Bogor</small>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Newsletter End -->
- <!-- Announcement Start -->
- <div class="mb-4 mx-5">
-    <form method="GET" action="{{ route('news.index') }}">
-        <div class="btn-group" role="group">
-            <!-- Tombol untuk "Semua Kategori" -->
-            <button type="submit" name="category_id" value=""
-                class="btn btn-outline-primary {{ request('category_id') == '' ? 'active' : '' }}">
-                Semua Kategori
-            </button>
-            <!-- Tombol untuk setiap kategori -->
-            @foreach($categories as $category)
-                <button type="submit" name="category_id" value="{{ $category->id }}"
-                    class="btn btn-outline-primary {{ request('category_id') == $category->id ? 'active' : '' }}">
-                    {{ $category->judul }}
-                </button>
-            @endforeach
-        </div>
-    </form>
-</div>
-
-
-<div id="postsContainer" class="row g-5 mt-4">
-    @forelse($posts as $post)
-        <div class="col-lg-6 post-item">
-            <div class="ratio ratio-16x9">
-                <img src="{{ asset('storage/' . $post->file) }}" alt="{{ $post->judul }}" class="img-fluid" />
-            </div>
-            <div class="border rounded p-4">
-                <h5 class="mb-3 text-center" style="color: blue;">{{ $post->judul }}</h5>
-                <div class="news-date mb-4">
-                    <small class="text-muted">{{ $post->created_at->format('d M Y') }}</small>
+    <div class="container">
+        <div id="postsContainer" class="row g-4">
+            @forelse($galleries as $gallery)
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="card border-0 shadow-sm position-relative overflow-hidden">
+                    <div class="ratio ratio-16x9 position-relative">
+                        <img src="{{ asset('storage/' . $gallery->photos) }}" alt="Gallery Image" class="img-fluid rounded" />
+                        <!-- Hover text -->
+                        <div class="hover-overlay d-flex align-items-center justify-content-center position-absolute top-0 start-0 w-100 h-100">
+                            <p class="m-0 text-white">{{ $gallery->desc_photo ?? 'Gallery Image' }}</p>
+                        </div>
+                    </div>
+                        <div class="card-body">
+                            <small class="text-muted d-block">{{ $gallery->created_at->format('d M Y') }}</small>
+                        </div>
+                    </div>
                 </div>
-                <div class="d-flex justify-content-center">
-                    <a href="{{ route('post.show', $post->id) }}" class="btn btn-primary rounded-pill px-4">
-                        Baca Selengkapnya
-                    </a>
+            @empty
+                <p>No galleries available.</p>
+            @endforelse
+                @forelse($posts as $photo)
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="card border-0 shadow-sm position-relative overflow-hidden">
+                        <div class="ratio ratio-16x9 position-relative">
+                            <img src="{{ asset('storage/' . $photo->file) }}" alt="Gallery Image" class="img-fluid rounded" />
+                            <!-- Hover text -->
+                            <div class="hover-overlay d-flex align-items-center justify-content-center position-absolute top-0 start-0 w-100 h-100">
+                                <p class="m-0 text-white">{{ $photo->desc_photo ?? 'Gallery Image' }}</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <small class="text-muted d-block">{{ $gallery->created_at->format('d M Y') }}</small>
+                        </div>
+                    </div>
+                </div>
+                @empty
+                <p>No galleries available.</p>
+                @endforelse
+            </div>
+            </div>
+    </div>
+</section>
+
+<section id="berita" style="padding-top: 50px;">
+    <!-- Header Section -->
+    <div class="container-xxl bg-primary newsletter my-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container px-lg-5">
+            <div class="row align-items-center" style="height: 250px;">
+                <div class="col-12 col-md-6">
+                    <h1 class="text-white">Berita</h1>
+                    <small class="text-white">Tentang Kominfo</small>
                 </div>
             </div>
         </div>
-    @empty
-        <p class="text-center">Belum ada berita di kategori ini.</p>
-    @endforelse
-</div>
+    </div>
 
+    <!-- Posts Section -->
+    <div class="container">
+        <div id="postsContainer" class="row g-4">
+            @forelse($posts as $post)
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="card border-0 shadow-sm position-relative overflow-hidden">
+                        <div class="ratio ratio-16x9">
+                            <img src="{{ asset('storage/' . $post->file) }}" alt="{{ $post->judul }}" class="img-fluid rounded transition-filter" />
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title text-center text-primary mb-3">{{ $post->judul }}</h5>
+                            <small class="text-muted d-block text-center">{{ $post->created_at->format('d M Y') }}</small>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                                <a href="{{ route('post.show', $post->id) }}" class="btn btn-primary rounded-pill px-4">
+                                    Baca Selengkapnya
+                                </a>
+                            </div>
+                    </div>
+                </div>
+
+            @empty
+                <p class="text-center text-muted">Belum ada berita di kategori ini.</p>
+            @endforelse
+        </div>
+    </div>
+</section>
 
   <!-- Footer -->
   <footer class="bg-custom py-5">
         <div class="container">
             <div class="row gy-4">
                 <!-- Tentang Kami -->
-                <div class="col-md-4 text-white" id="contact">
+                <div class="col-md-4 text-white">
                     <h5 class="fw-bold mb-3 text-white">Tentang Kami</h5>
                     <p>Kami menyediakan berita terkini untuk komunitas kami. Tetap terhubung untuk mendapatkan informasi terbaru.</p>
                 </div>
@@ -263,7 +305,7 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-    \<script>
+    <script>
     document.addEventListener('DOMContentLoaded', () => {
         const swiper = new Swiper('.swiper', {
             slidesPerView: 1,

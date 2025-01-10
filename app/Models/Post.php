@@ -21,6 +21,7 @@ class Post extends Model
         'konten',
         'file',
         'user_id',
+        'desc_photo',
     ];
 
     protected static function booted()

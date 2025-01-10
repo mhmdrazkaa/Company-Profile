@@ -477,6 +477,25 @@ h6,
     transition-delay: .15s;
 }
 
+.ratio {
+    position: relative;
+    overflow: hidden; /* Ensures child elements do not overflow */
+}
+
+.hover-overlay {
+    background: rgba(0, 0, 0, 0.7); /* Black background with opacity */
+    color: white; /* Text color */
+    opacity: 0; /* Initially hidden */
+    visibility: hidden; /* Hide the overlay */
+    transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth transition */
+}
+
+.ratio:hover .hover-overlay {
+    opacity: 1; /* Fully visible on hover */
+    visibility: visible; /* Ensure visibility on hover */
+}
+
+
 
 
 .bdy {

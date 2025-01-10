@@ -11,8 +11,8 @@ class Videos extends Model
     protected $fillable = [
 
         'judul',
-        'link'
-
+        'link',
+        'description'
     ];
 
     //Untuk Mengubah format watchtv ke embed agar bisa dimunculkan di iframe
